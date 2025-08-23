@@ -1,0 +1,11 @@
+{
+  "name": "erp-decor-tiles-functions",
+  "version": "1.0.0",
+  "description": "Cloud functions for erp-decor-tiles",
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^11.0.0",
+    "firebase-functions": "^4.0.0"
+  },
+  "private": true
+}
