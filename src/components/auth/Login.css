@@ -1,20 +1,26 @@
 .login-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   background-color: #f0f2f5;
   font-family: Helvetica, Arial, sans-serif;
+  padding: 20px; /* Add padding for smaller screens */
 }
 
-.login-box {
+/* Styles for the left section (logo and text) */
+.login-left {
+  text-align: left;
+  margin-right: 80px; /* Space between left and right sections */
+}
+
+/* Styles for the right section (login form) */
+.login-right {
   background-color: #fff;
-  width: 400px;
-  padding: 20px;
-  border-radius: 8px;
+  width: 350px; /* Adjusted width for the login box */
+  padding: 15px; /* Adjusted padding */
+  border-radius: 8px; /* Slightly smaller border-radius */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
 }
 
 .login-logo h1 {
@@ -22,15 +28,16 @@
   color: #1877f2;
   margin: 0;
 }
-
 .login-logo p {
   color: #606770;
-  margin: 10px 0;
+  margin-top: 0; /* Adjusted margin */
+  font-size: 1.5em; /* Increased font size */
+  line-height: 1.34;
 }
 
 form {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Ensure form elements stack vertically */
 }
 
 input {
@@ -39,11 +46,14 @@ input {
   border: 1px solid #dddfe2;
   border-radius: 5px;
   font-size: 1em;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
-button {
+/* Styling for the main login button */
+form button {
   background-color: #1877f2;
   color: #fff;
+  font-weight: bold; /* Bold text for the button */
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -62,19 +72,61 @@ button:hover {
   margin: 5px 0;
 }
 
+.login-right .login-links {
+  text-align: center; /* Center the "Forgot Password" link */
+}
+
 .login-links a {
   color: #1877f2;
   text-decoration: none;
   font-size: 0.9em;
-  margin: 10px 5px;
+  margin-top: 10px;
+  display: inline-block; /* Allow vertical margin */
 }
 
 .login-links a:hover {
   text-decoration: underline;
 }
 
+.divider {
+  border-bottom: 1px solid #dadde1; /* Add a divider line */
+  margin: 20px 0;
+}
+
+/* Styling for the "Create New Account" button */
+.create-account-button {
+  background-color: #42b72a;
+  color: #fff;
+  font-weight: bold;
+  padding: 12px 16px; /* Adjusted padding */
+  border: none;
+  border-radius: 6px; /* Slightly larger border-radius */
+  font-size: 1.0em; /* Slightly larger font size */
+  cursor: pointer;
+  margin-top: 10px;
+}
+
 .login-footer {
   margin-top: 20px;
   color: #606770;
   font-size: 0.9em;
+  text-align: center; /* Center the footer */
+}
+
+/* Responsive adjustments */
+@media (max-width: 850px) {
+  .login-container {
+    flex-direction: column; /* Stack sections vertically */
+  }
+
+  .login-left {
+    margin-right: 0;
+    margin-bottom: 40px; /* Add space below the left section */
+    text-align: center; /* Center text on smaller screens */
+  }
+
+  .login-right {
+    width: 100%; /* Allow login box to take full width */
+    max-width: 350px; /* Maintain a max-width */
+  }
 }

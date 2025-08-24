@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
+import LanguageSwitcher from '../LanguageSwitcher';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import './Login.css';
+import { getUserRole } from '../../firebase'; // Import getUserRole
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -15,8 +16,15 @@ const Login = () => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert('Login successful!');
-      navigate('/'); // Redirect to home on success
+      const user = auth.currentUser; // Get the logged-in user
+      if (user) {
+        const role = await getUserRole(user.uid); // Get the user's role
+        if (role === 'admin') {
+          navigate('/admin'); // Redirect admin to admin dashboard
+        } else {
+          navigate('/dashboard'); // Redirect customer to customer dashboard
+        }
+      }
     } catch (error) {
       // This will give us a more specific error message
       setError('Failed to log in: ' + error.message);
@@ -29,14 +37,16 @@ const Login = () => {
     <div className="login-container">
       <div className="login-box">
         <div className="login-logo">
-          <h1>West Africa Decor</h1>
-          <p>Log in to continue</p>
+          {/* Placeholder for the Facebook logo */}
+          <img src="/logo.svg" alt="Facebook" className="facebook-logo" />
+          <p>Connect with friends and the world around you on Facebook.</p>
         </div>
         <form onSubmit={handleLogin}>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="input-field"
             placeholder="Email or phone number"
             required
           />
@@ -44,19 +54,23 @@ const Login = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="input-field"
             placeholder="Password"
             required
           />
           {error && <p className="error">{error}</p>}
-          <button type="submit">Log In</button>
+          <button type="submit" className="login-button">Log In</button>
         </form>
         <div className="login-links">
           <a href="/forgot">Forgot password?</a>
-          <a href="/signup">Create new account</a>
+        </div>
+        <div className="divider"></div>
+        <div className="create-account">
+          <button className="create-account-button" onClick={() => navigate('/signup')}>Create new account</button>
         </div>
       </div>
       <div className="login-footer">
-        <p>Language: English (set)</p>
+        <LanguageSwitcher />
       </div>
     </div>
   );

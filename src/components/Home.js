@@ -4,6 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { signOut } from 'firebase/auth';
 import { Link } from 'react-router-dom';
+import '../App.css'; // Added import for App.css
 
 const Home = () => {
   const [products, setProducts] = useState([]);
